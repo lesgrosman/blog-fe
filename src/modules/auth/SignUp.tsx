@@ -1,19 +1,31 @@
+import { AxiosMutationError } from '@/utils/types'
 import { FormProvider, useForm } from 'react-hook-form'
-import { SignForm, signSchema } from './utils'
+import { SignUpForm, signSchema } from './utils'
+import { signup } from './mutations'
+import { useMutation } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
 import { yupResolver } from '@hookform/resolvers/yup'
-import FormView from './FormView'
+import Button from '@/components/Button'
+import TextInput from '@/components/Form/TextInput'
 
 const SignUp = () => {
-  const methods = useForm<SignForm>({
+  const router = useRouter()
+  const { mutate, error, isLoading } = useMutation<void, AxiosMutationError, SignUpForm>(signup, {
+    onSuccess: () => router.push('/signin'),
+  })
+
+  const methods = useForm<SignUpForm>({
     defaultValues: {
       password: '',
       username: '',
+      firstName: '',
+      lastName: '',
     },
     resolver: yupResolver(signSchema),
     mode: 'onSubmit',
   })
-  const handleSubmit = methods.handleSubmit((data: SignForm) => {
-    console.log(data)
+  const handleSubmit = methods.handleSubmit((data: SignUpForm) => {
+    mutate(data)
   })
 
   return (
@@ -21,7 +33,14 @@ const SignUp = () => {
       <h2 className='text-center mb-10'>Sign Up</h2>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-          <FormView />
+          <TextInput name='username' label='Username' />
+          <TextInput name='password' label='Password' />
+          <TextInput name='firstName' label='First Name' />
+          <TextInput name='lastName' label='Last Name' />
+          <div className='flex sm:justify-end justify-center mt-2'>
+            <Button label='Sign up' type='submit' disabled={isLoading} />
+          </div>
+          {error && <span className='text-error text-end'>{error?.response?.data.message}</span>}
         </form>
       </FormProvider>
     </div>
