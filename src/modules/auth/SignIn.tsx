@@ -1,5 +1,5 @@
 import { FormProvider, useForm } from 'react-hook-form'
-import { SignInForm, signSchema } from './utils'
+import { SignInForm, signinSchema } from './utils'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Button from '@/components/Button'
 import Link from 'next/link'
@@ -11,7 +11,7 @@ const SignIn = () => {
       password: '',
       username: '',
     },
-    resolver: yupResolver(signSchema),
+    resolver: yupResolver(signinSchema),
     mode: 'onSubmit',
   })
   const handleSubmit = methods.handleSubmit((data: SignInForm) => {
