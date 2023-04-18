@@ -1,11 +1,12 @@
 import { FormProvider, useForm } from 'react-hook-form'
-import { SignForm, signSchema } from './utils'
+import { SignInForm, signSchema } from './utils'
 import { yupResolver } from '@hookform/resolvers/yup'
-import FormView from './FormView'
+import Button from '@/components/Button'
 import Link from 'next/link'
+import TextInput from '@/components/Form/TextInput'
 
 const SignIn = () => {
-  const methods = useForm<SignForm>({
+  const methods = useForm<SignInForm>({
     defaultValues: {
       password: '',
       username: '',
@@ -13,7 +14,7 @@ const SignIn = () => {
     resolver: yupResolver(signSchema),
     mode: 'onSubmit',
   })
-  const handleSubmit = methods.handleSubmit((data: SignForm) => {
+  const handleSubmit = methods.handleSubmit((data: SignInForm) => {
     console.log(data)
   })
 
@@ -22,7 +23,11 @@ const SignIn = () => {
       <h2 className='text-center mb-10'>Sign In</h2>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-          <FormView />
+          <TextInput name='username' label='Username' />
+          <TextInput name='password' label='Password' />
+          <div className='flex sm:justify-end justify-center mt-2'>
+            <Button label='Sign up' type='submit' />
+          </div>
         </form>
       </FormProvider>
       <div></div>

@@ -1,8 +1,15 @@
 import * as yup from 'yup'
 
-export type SignForm = {
+export type SignInForm = {
   username: string
   password: string
+}
+
+export type SignUpForm = {
+  username: string
+  password: string
+  firstName: string
+  lastName: string
 }
 
 export const signSchema = yup.object({
