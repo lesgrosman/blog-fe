@@ -1,6 +1,6 @@
 import { AxiosMutationError } from '@/utils/types'
 import { FormProvider, useForm } from 'react-hook-form'
-import { SignUpForm, signSchema } from './utils'
+import { SignUpForm, signupSchema } from './utils'
 import { signup } from './mutations'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
@@ -21,7 +21,7 @@ const SignUp = () => {
       firstName: '',
       lastName: '',
     },
-    resolver: yupResolver(signSchema),
+    resolver: yupResolver(signupSchema),
     mode: 'onSubmit',
   })
   const handleSubmit = methods.handleSubmit((data: SignUpForm) => {
