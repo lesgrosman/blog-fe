@@ -6,6 +6,7 @@ import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Button from '@/components/Button'
+import Link from 'next/link'
 import TextInput from '@/components/Form/TextInput'
 
 const SignUp = () => {
@@ -43,6 +44,12 @@ const SignUp = () => {
           {error && <span className='text-error text-end'>{error?.response?.data.message}</span>}
         </form>
       </FormProvider>
+      <p className='text-center mt-6'>
+        Already have an account?
+        <Link href='/signin' className='text-primary-default hover:underline ml-2'>
+          Sign in
+        </Link>
+      </p>
     </div>
   )
 }
