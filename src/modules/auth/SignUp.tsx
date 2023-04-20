@@ -1,4 +1,4 @@
-import { AxiosMutationError } from '@/utils/types'
+import { AxiosCustomError } from '@/utils/types'
 import { FormProvider, useForm } from 'react-hook-form'
 import { SignUpForm, signupSchema } from './utils'
 import { signup } from './mutations'
@@ -11,7 +11,7 @@ import TextInput from '@/components/Form/TextInput'
 
 const SignUp = () => {
   const router = useRouter()
-  const { mutate, error, isLoading } = useMutation<void, AxiosMutationError, SignUpForm>(signup, {
+  const { mutate, error, isLoading } = useMutation<void, AxiosCustomError, SignUpForm>(signup, {
     onSuccess: () => router.push('/signin'),
   })
 

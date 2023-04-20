@@ -1,5 +1,5 @@
 import { ACCESS_TOKEN, TOKEN_EXPIRES_IN, useAuthContext } from '@/providers/auth'
-import { AxiosMutationError } from '../types'
+import { AxiosCustomError } from '../types'
 import { SignInForm } from '@/modules/auth/utils'
 import { useCallback, useState } from 'react'
 import axios from 'axios'
@@ -8,13 +8,13 @@ type UseAuth = {
   login: ({ username, password }: SignInForm) => Promise<void>
   logout: () => void
   loading: boolean
-  error: AxiosMutationError | null
+  error: AxiosCustomError | null
 }
 
 export const useAuth = (): UseAuth => {
   //state
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<AxiosMutationError | null>(null)
+  const [error, setError] = useState<AxiosCustomError | null>(null)
 
   //auth store
   const { setIsUser, setToken } = useAuthContext()
@@ -47,7 +47,7 @@ export const useAuth = (): UseAuth => {
         localStorage.removeItem(ACCESS_TOKEN)
         localStorage.removeItem(TOKEN_EXPIRES_IN)
         setLoading(false)
-        setError(err as AxiosMutationError)
+        setError(err as AxiosCustomError)
       }
     },
     [error, setIsUser, setToken]
