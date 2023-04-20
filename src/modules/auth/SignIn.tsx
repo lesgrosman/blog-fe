@@ -27,7 +27,7 @@ const SignIn = () => {
   })
 
   useEffect(() => {
-    if (isUser) router.push('/profile')
+    if (isUser) router.push('/profile/my-posts')
   }, [isUser])
 
   return (
