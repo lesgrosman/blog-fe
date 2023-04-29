@@ -1,7 +1,11 @@
-export default function Home() {
+import Home from '@/modules/home/Home'
+
+const HomePage = () => {
   return (
     <main>
-      <h1>Home page</h1>
+      <Home />
     </main>
   )
 }
+
+export default HomePage

@@ -1,4 +1,4 @@
-import MyPosts from '@/modules/profile/my-posts/MyPosts'
+import MyPosts from '@/modules/profile/pages/my-posts/MyPosts'
 
 const MyPostsPage = () => {
   return <MyPosts />

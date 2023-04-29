@@ -1,6 +1,6 @@
-import { useGetPostById } from '../fetchers'
+import { useGetPostById } from '../../fetchers'
 import { useRouter } from 'next/router'
-import Form from './Form'
+import Logic from './Logic'
 
 const UpdatePost = () => {
   const router = useRouter()
@@ -13,7 +13,7 @@ const UpdatePost = () => {
 
   if (error || !data) return <span>{error?.response?.data.message}</span>
 
-  return <Form post={data} />
+  return <Logic post={data} />
 }
 
 export default UpdatePost

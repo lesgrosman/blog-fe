@@ -1,4 +1,4 @@
-import CreatePost from '@/modules/profile/create-post/CreatePost'
+import CreatePost from '@/modules/profile/pages/create-post/CreatePost'
 
 const CreatePostPage = () => {
   return <CreatePost />

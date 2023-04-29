@@ -1,7 +1,7 @@
 import { AxiosCustomError } from '@/utils/types'
 import { Controller, useFormContext } from 'react-hook-form'
 import Button from '@/components/Button'
-import SelectWithFetch from '../SelectWithFetch'
+import SelectWithFetch from '../components/SelectWithFetch'
 import TextArea from '@/components/Form/TextAreaInput'
 import TextInput from '@/components/Form/TextInput'
 import dynamic from 'next/dynamic'
@@ -14,7 +14,7 @@ interface Props {
   error: AxiosCustomError | null
 }
 
-const FormView = ({ title, submitLabel, disabled, error }: Props) => {
+const CreatePostForm = ({ title, submitLabel, disabled, error }: Props) => {
   const { control } = useFormContext()
 
   return (
@@ -47,4 +47,4 @@ const FormView = ({ title, submitLabel, disabled, error }: Props) => {
   )
 }
 
-export default FormView
+export default CreatePostForm
