@@ -16,7 +16,6 @@ const AxiosProvider = ({ children }: React.PropsWithChildren<unknown>) => {
     axios.interceptors.request.use((config: InternalAxiosRequestConfig) => {
       // Read token for anywhere, in this case directly from localStorage
       const token = accessToken
-
       if (token) {
         config.headers.Authorization = `Bearer ${token}`
       }

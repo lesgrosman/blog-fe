@@ -1,51 +1,46 @@
 import { FormProvider, useForm } from 'react-hook-form'
-import { PostDetail } from '@/utils/types'
-import { PostForm, createPostSchema } from '../utils'
+import { PostForm, createPostDefaultValues, createPostSchema } from '../../utils'
+import { useCreatePost } from '../../fetchers'
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useUpdatePost } from '../fetchers'
+import { useUser } from '@/utils/auth/hooks/useUser'
 import { yupResolver } from '@hookform/resolvers/yup'
-import PostFormView from '../forms/PostFormView'
+import PostFormView from '../../forms/PostFormView'
 
-interface Props {
-  post: PostDetail
-}
-
-const Form = ({ post }: Props) => {
+const CreatePost = () => {
   const router = useRouter()
+  const user = useUser()
 
-  const { mutate, isLoading, error } = useUpdatePost({
+  useEffect(() => {
+    if (!user) {
+      router.push('/signin')
+    }
+  })
+
+  const { mutate, isLoading, error } = useCreatePost({
     onSuccess: () => {
+      methods.reset()
       router.push('/profile/my-posts')
     },
   })
-
   const methods = useForm<PostForm>({
-    defaultValues: {
-      title: post.title,
-      perex: post.perex,
-      content: post.content,
-      categories: post.categories.map(cat => ({
-        id: cat.id,
-        value: cat.slug,
-        label: cat.name,
-      })),
-    },
+    defaultValues: createPostDefaultValues,
     resolver: yupResolver(createPostSchema),
     mode: 'onSubmit',
   })
 
   const handleSubmit = methods.handleSubmit((data: PostForm) => {
-    mutate({ post: data, id: post.id })
+    mutate(data)
   })
 
   return (
-    <div className='grid grid-cols-12 py-10'>
+    <div className='grid grid-cols-12'>
       <div className='col-span-9'>
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
             <PostFormView
-              title='Update your Post'
-              submitLabel='Update'
+              title='Create new post'
+              submitLabel='Create'
               disabled={isLoading}
               error={error}
             />
@@ -56,4 +51,4 @@ const Form = ({ post }: Props) => {
   )
 }
 
-export default Form
+export default CreatePost

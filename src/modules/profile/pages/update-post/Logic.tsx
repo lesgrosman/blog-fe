@@ -1,28 +1,41 @@
 import { FormProvider, useForm } from 'react-hook-form'
-import { PostForm, createPostDefaultValues, createPostSchema } from '../utils'
-import { useCreatePost } from '../fetchers'
+import { PostDetail } from '@/utils/types'
+import { PostForm, createPostSchema } from '../../utils'
 import { useRouter } from 'next/router'
+import { useUpdatePost } from '../../fetchers'
 import { yupResolver } from '@hookform/resolvers/yup'
-import PostFormView from '../forms/PostFormView'
+import PostFormView from '../../forms/PostFormView'
 
-const CreatePost = () => {
+interface Props {
+  post: PostDetail
+}
+
+const Logic = ({ post }: Props) => {
   const router = useRouter()
 
-  const { mutate, isLoading, error } = useCreatePost({
+  const { mutate, isLoading, error } = useUpdatePost({
     onSuccess: () => {
-      methods.reset()
       router.push('/profile/my-posts')
     },
   })
 
   const methods = useForm<PostForm>({
-    defaultValues: createPostDefaultValues,
+    defaultValues: {
+      title: post.title,
+      perex: post.perex,
+      content: post.content,
+      categories: post.categories.map(cat => ({
+        id: cat.id,
+        value: cat.slug,
+        label: cat.name,
+      })),
+    },
     resolver: yupResolver(createPostSchema),
     mode: 'onSubmit',
   })
 
   const handleSubmit = methods.handleSubmit((data: PostForm) => {
-    mutate(data)
+    mutate({ post: data, id: post.id })
   })
 
   return (
@@ -31,8 +44,8 @@ const CreatePost = () => {
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
             <PostFormView
-              title='Create new post'
-              submitLabel='Create'
+              title='Update your Post'
+              submitLabel='Update'
               disabled={isLoading}
               error={error}
             />
@@ -43,4 +56,4 @@ const CreatePost = () => {
   )
 }
 
-export default CreatePost
+export default Logic

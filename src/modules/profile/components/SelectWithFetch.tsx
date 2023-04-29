@@ -1,5 +1,5 @@
 import { Category } from '@/utils/types'
-import { getCategories } from './fetchers'
+import { getCategories } from '../fetchers'
 import { useQuery } from '@tanstack/react-query'
 import SelectInput from '@/components/Form/SelectInput'
 

@@ -1,4 +1,4 @@
-import UpdatePost from '@/modules/profile/update-post/UpdatePost'
+import UpdatePost from '@/modules/profile/pages/update-post/UpdatePost'
 
 const UpdatePostPage = () => {
   return <UpdatePost />
