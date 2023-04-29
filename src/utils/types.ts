@@ -2,7 +2,7 @@ import { AxiosError } from 'axios'
 
 export type AxiosCustomError = AxiosError<Record<string, string>>
 
-export type AuthorSafe = {
+export type User = {
   id: string
   username: string
   firstName: string
@@ -29,5 +29,5 @@ export type Post = {
 
 export type PostDetail = Post & {
   categories: Category[]
-  author: AuthorSafe
+  author: User
 }

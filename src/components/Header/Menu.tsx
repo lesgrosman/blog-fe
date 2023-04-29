@@ -1,11 +1,10 @@
 import { ArrowLeftOnRectangleIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
-import { useAuth } from '@/utils/hooks/useAuth'
+import { useLogout } from '@/utils/auth/hooks/useLogout'
 
 const Dropdown = () => {
-  const { logout } = useAuth()
-  const handleLogout = () => logout()
+  const { logout } = useLogout()
 
   return (
     <div>
@@ -29,7 +28,7 @@ const Dropdown = () => {
               <Menu.Item>
                 {({ active }) => (
                   <button
-                    onClick={handleLogout}
+                    onClick={logout}
                     className={`${
                       active ? 'bg-primary-default text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
