@@ -1,10 +1,10 @@
-import { useAuthContext } from '@/providers/auth'
+import { useUser } from '@/utils/auth/hooks/useUser'
 import Dropdown from './Menu'
 import Image from 'next/image'
 import Link from 'next/link'
 
 const Header = () => {
-  const { isUser } = useAuthContext()
+  const user = useUser()
 
   return (
     <div className='w-screem bg-cyan-600 text-white h-[100px] p-0 items-center'>
@@ -12,7 +12,7 @@ const Header = () => {
         <Link href='/'>
           <Image src='/logo.svg' alt='logo' width={200} height={140} />
         </Link>
-        {isUser ? (
+        {user ? (
           <Dropdown />
         ) : (
           <div className='flex gap-4'>

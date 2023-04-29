@@ -1,18 +1,18 @@
 import { FormProvider, useForm } from 'react-hook-form'
 import { SignInForm, signinSchema } from './utils'
-import { useAuth } from '@/utils/hooks/useAuth'
-import { useAuthContext } from '@/providers/auth'
 import { useEffect } from 'react'
+import { useLogin } from '@/utils/auth/hooks/useLogin'
 import { useRouter } from 'next/router'
+import { useUser } from '@/utils/auth/hooks/useUser'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Button from '@/components/Button'
 import Link from 'next/link'
 import TextInput from '@/components/Form/TextInput'
 
 const SignIn = () => {
-  const { isUser } = useAuthContext()
+  const user = useUser()
   const router = useRouter()
-  const { login, error, loading } = useAuth()
+  const { login, error, loading } = useLogin()
 
   const methods = useForm<SignInForm>({
     defaultValues: {
@@ -27,8 +27,8 @@ const SignIn = () => {
   })
 
   useEffect(() => {
-    if (isUser) router.push('/profile/my-posts')
-  }, [isUser])
+    if (user) router.push('/profile/my-posts')
+  }, [user])
 
   return (
     <div className='max-w-xl m-auto mt-10 w-full'>
