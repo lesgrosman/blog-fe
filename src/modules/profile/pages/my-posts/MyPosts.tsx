@@ -15,7 +15,7 @@ const MyPosts = () => {
 
   return (
     <div className='flex gap-4'>
-      <h1>Private page Profile</h1>
+      <h2>Private page Profile</h2>
       <Button label='Create post' onClick={handleClickCreate} />
     </div>
   )
