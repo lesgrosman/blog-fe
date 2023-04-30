@@ -1,11 +1,10 @@
 import { createContext, useContext, useMemo } from 'react'
-import { useAuthStore } from '@/utils/auth/store/authStore'
+import { getAccessToken } from '@/utils/auth/store/authStore'
 import Axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios'
 
 const AxiosContext = createContext({} as AxiosInstance)
 
 const AxiosProvider = ({ children }: React.PropsWithChildren<unknown>) => {
-  const { accessToken } = useAuthStore()
   const axios = useMemo(() => {
     const axios = Axios.create({
       headers: {
@@ -15,7 +14,7 @@ const AxiosProvider = ({ children }: React.PropsWithChildren<unknown>) => {
 
     axios.interceptors.request.use((config: InternalAxiosRequestConfig) => {
       // Read token for anywhere, in this case directly from localStorage
-      const token = accessToken
+      const token = getAccessToken()
       if (token) {
         config.headers.Authorization = `Bearer ${token}`
       }
