@@ -1,6 +1,7 @@
 import { FormProvider, useForm } from 'react-hook-form'
 import { PostDetail } from '@/utils/types'
 import { PostForm, createPostSchema } from '../../utils'
+import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import { useUpdatePost } from '../../fetchers'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -12,10 +13,11 @@ interface Props {
 
 const Logic = ({ post }: Props) => {
   const router = useRouter()
+  const queryClient = useQueryClient()
 
   const { mutate, isLoading, error } = useUpdatePost({
     onSuccess: () => {
-      router.push('/profile/my-posts')
+      router.push('/profile/my-posts'), queryClient.invalidateQueries([post.id])
     },
   })
 
