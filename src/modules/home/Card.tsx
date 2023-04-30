@@ -1,4 +1,4 @@
-import { PostItem } from './types'
+import { PostItem } from '@/utils/types'
 import Image from 'next/image'
 import Link from 'next/link'
 import LocalizedDate from '@/utils/components/LocalizedDate'

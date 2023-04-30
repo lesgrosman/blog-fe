@@ -1,4 +1,4 @@
-import { PostItem } from './types'
+import { PostItem } from '@/utils/types'
 import axios from 'axios'
 
 export const getAllPosts = async (): Promise<PostItem[]> => {

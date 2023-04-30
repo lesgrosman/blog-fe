@@ -1,4 +1,4 @@
-import { PostItem } from './types'
+import { PostItem } from '@/utils/types'
 import Card from './Card'
 import React from 'react'
 
