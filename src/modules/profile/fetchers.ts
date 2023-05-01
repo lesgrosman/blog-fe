@@ -91,3 +91,25 @@ export const useGeMyPosts = () => {
     return data
   })
 }
+
+type UseDeletePost = ({
+  onSuccess,
+}: {
+  onSuccess: () => void
+}) => UseMutationResult<{ id: string }, AxiosCustomError, string, unknown>
+
+export const useDeletePost: UseDeletePost = ({ onSuccess }) => {
+  const customAxios = useAxiosAuth()
+
+  return useMutation<{ id: string }, AxiosCustomError, string>(
+    async (id: string) => {
+      const { data } = await customAxios.delete<{ id: string }>(
+        `${process.env.NEXT_PUBLIC_API}/posts/${id}`
+      )
+      return data
+    },
+    {
+      onSuccess,
+    }
+  )
+}
