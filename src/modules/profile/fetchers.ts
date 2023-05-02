@@ -1,4 +1,4 @@
-import { AxiosCustomError, Category, Post, PostDetail, PostItem } from '@/utils/types'
+import { AxiosCustomError, Category, MyPostsResponse, Post, PostDetail } from '@/utils/types'
 import { PostForm } from './utils'
 import { UseMutationResult, useMutation, useQuery } from '@tanstack/react-query'
 import { useAxiosAuth } from '@/providers/axios'
@@ -83,9 +83,14 @@ export const useGetPostById = (id: string) => {
 export const useGeMyPosts = () => {
   const customAxios = useAxiosAuth()
 
-  return useQuery<PostItem[], AxiosCustomError>(['My-posts'], async () => {
-    const { data } = await customAxios.get<PostItem[]>(
-      `${process.env.NEXT_PUBLIC_API}/posts/my-posts`
+  return useQuery<MyPostsResponse, AxiosCustomError>(['My-posts'], async () => {
+    const { data } = await customAxios.get<MyPostsResponse>(
+      `${process.env.NEXT_PUBLIC_API}/posts/my-posts`,
+      {
+        params: {
+          limit: 10,
+        },
+      }
     )
 
     return data

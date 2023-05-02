@@ -2,6 +2,12 @@ import { AxiosError } from 'axios'
 
 export type AxiosCustomError = AxiosError<Record<string, string>>
 
+export type Pagination = {
+  limit: number
+  offset: number
+  count: number
+}
+
 export type User = {
   id: string
   username: string
@@ -42,4 +48,9 @@ export type PostItem = {
   updatedAt: Date
   categories: Category[]
   author: User
+}
+
+export type MyPostsResponse = {
+  posts: PostItem[]
+  pagination: Pagination
 }

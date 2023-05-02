@@ -57,7 +57,7 @@ const FetchPosts = () => {
     }),
   ]
 
-  const tableData: TableRow[] = data.map(post => ({
+  const tableData: TableRow[] = data.posts.map(post => ({
     id: post.id,
     title: post.title,
     perex: post.perex,
