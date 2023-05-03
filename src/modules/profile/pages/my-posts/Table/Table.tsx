@@ -1,10 +1,13 @@
 import {
+  SortingState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+import { useState } from 'react'
 import Pagination from '@/components/Pagination'
 import type { ColumnDef } from '@tanstack/react-table'
 
@@ -14,16 +17,23 @@ interface ReactTableProps<T extends object> {
 }
 
 export const Table = <T extends object>({ data, columns }: ReactTableProps<T>) => {
+  const [sorting, setSorting] = useState<SortingState>([])
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
     initialState: {
       pagination: {
         pageSize: 4,
       },
+    },
+    state: {
+      sorting,
     },
   })
 
@@ -42,9 +52,22 @@ export const Table = <T extends object>({ data, columns }: ReactTableProps<T>) =
                           key={header.id}
                           className='text-start px-6 py-4 text-sm font-medium text-gray-900'
                         >
-                          {header.isPlaceholder
-                            ? null
-                            : flexRender(header.column.columnDef.header, header.getContext())}
+                          {header.isPlaceholder ? null : (
+                            <div
+                              {...{
+                                className: header.column.getCanSort()
+                                  ? 'cursor-pointer select-none'
+                                  : '',
+                                onClick: header.column.getToggleSortingHandler(),
+                              }}
+                            >
+                              {flexRender(header.column.columnDef.header, header.getContext())}
+                              {{
+                                asc: ' ↑',
+                                desc: ' ↓',
+                              }[header.column.getIsSorted() as string] ?? null}
+                            </div>
+                          )}
                         </th>
                       ))}
                     </tr>

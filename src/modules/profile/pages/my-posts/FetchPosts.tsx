@@ -49,6 +49,7 @@ const FetchPosts = () => {
       id: 'categories',
       header: () => 'Categories',
       cell: cell => <CategoryCell cell={cell} />,
+      enableSorting: false,
     }),
     columnHelper.display({
       id: 'actions',
