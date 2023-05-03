@@ -88,7 +88,7 @@ export const useGeMyPosts = () => {
       `${process.env.NEXT_PUBLIC_API}/posts/my-posts`,
       {
         params: {
-          limit: 10,
+          limit: 1000,
         },
       }
     )
