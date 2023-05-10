@@ -25,7 +25,7 @@ export const useCreatePost: UseCreatePost = ({ onSuccess }) => {
         categories: post.categories.map(cat => ({
           id: cat.id,
           slug: cat.value,
-          name: cat.label,
+          name: cat.name,
         })),
       })
 
@@ -58,7 +58,7 @@ export const useUpdatePost: UseUpdatePost = ({ onSuccess }) => {
         categories: post.categories.map(cat => ({
           id: cat.id,
           slug: cat.value,
-          name: cat.label,
+          name: cat.name,
         })),
       })
 

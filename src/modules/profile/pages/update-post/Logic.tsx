@@ -29,7 +29,7 @@ const Logic = ({ post }: Props) => {
       categories: post.categories.map(cat => ({
         id: cat.id,
         value: cat.slug,
-        label: cat.name,
+        name: cat.name,
       })),
     },
     resolver: yupResolver(createPostSchema),
