@@ -38,7 +38,7 @@ const MultiSelect = ({ label, options, name }: Props) => {
   )
 
   return (
-    <div className='relative flex flex-col gap-2'>
+    <div className='relative flex flex-col gap-1'>
       <span>{label}</span>
       <Listbox value={value} onChange={handleChange} multiple>
         <div className='relative mt-1'>
