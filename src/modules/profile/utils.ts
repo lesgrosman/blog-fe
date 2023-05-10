@@ -1,5 +1,5 @@
 import * as yup from 'yup'
-import { SelectOption } from '@/components/Form/SelectInput'
+import { SelectOption } from '@/components/Form/MultiSelect'
 
 export type PostForm = {
   title: string
