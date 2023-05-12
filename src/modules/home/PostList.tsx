@@ -9,9 +9,11 @@ interface Props {
 const PostList = ({ data }: Props) => {
   return (
     <div className='grid grid-cols-12'>
-      <section className='lg:col-span-9 col-span-12 flex md:flex-col flex-row sm:flex-nowrap flex-wrap gap-6'>
+      <section className='grid grid-cols-12 lg:col-span-9 col-span-12 gap-6'>
         {data.map(post => (
-          <Card key={post.id} post={post} />
+          <div key={post.id} className='md:col-span-12 sm:col-span-6 col-span-12'>
+            <Card post={post} />
+          </div>
         ))}
       </section>
     </div>

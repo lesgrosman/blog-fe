@@ -8,7 +8,7 @@ interface Props {
 
 const CategoryCell = ({ cell }: Props) => {
   return (
-    <div className='flex gap-2'>
+    <div className='flex gap-2 flex-wrap'>
       {cell.getValue().map(cat => (
         <span key={cat.id} className='text-sm bg-primary-default px-2 py-1 rounded-full text-white'>
           {cat.name}

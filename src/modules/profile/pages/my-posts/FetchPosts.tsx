@@ -33,7 +33,7 @@ const FetchPosts = () => {
     columnHelper.accessor('perex', {
       id: 'perex',
       header: () => 'Perex',
-      cell: cell => <span className='line-clamp-2 text-sm'>{cell.getValue()}</span>,
+      cell: cell => <span className='line-clamp-3 text-sm'>{cell.getValue()}</span>,
     }),
     columnHelper.accessor('author', {
       id: 'author',
